@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07569a">
+<title>PT. Lagoliling Lintas Sulawesi | Ekspedisi</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--b:#07569a;--b2:#0b76c5;--nav:#063b6b;--bg:#f5faff;--line:#d7e7f4;--muted:#647d94;--text:#17324d;--card:#fff;--input:#fff}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:linear-gradient(#f5faff,#fff,#edf7ff);line-height:1.6}
+a{text-decoration:none;color:inherit}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:99;background:#ffffffee;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--nav)}
+.brand img,.fallback{width:48px;height:48px;border-radius:12px;object-fit:contain}
+.fallback{background:linear-gradient(135deg,var(--b),var(--b2));color:#fff;display:none;align-items:center;justify-content:center}
+.brand small{display:block;color:var(--b);font-size:10px;letter-spacing:1.4px}.brand strong{font-size:15px}
+nav ul{display:flex;list-style:none;gap:22px}nav a{font-size:14px;font-weight:700;color:#34536b;transition:.2s}nav a:hover{color:var(--b)}
+.menu{display:none;border:0;background:none;font-size:28px;color:var(--nav);cursor:pointer}
+.hero{padding:70px 0 75px;background:radial-gradient(circle at 90% 15%,#bfe5ff99,transparent 28%),linear-gradient(135deg,#e8f5ff,#fff 60%,#e4f3ff)}
+.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}
+.badge{display:inline-block;background:#dff1ff;color:var(--b);padding:7px 13px;border-radius:99px;font-weight:800;font-size:12px}
+.hero h1{font-size:clamp(38px,5vw,64px);line-height:1.05;color:var(--nav);margin:17px 0}.hero h1 span{color:var(--b)}
+.hero p{color:#60788e;max-width:650px;margin-bottom:25px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.primary{background:linear-gradient(135deg,var(--b),var(--b2));color:#fff;box-shadow:0 10px 25px #07569a30}.light{background:#fff;color:var(--b);border:1px solid #cfe2f1}
+.promoSlider{position:relative;width:100%;max-width:480px;margin-left:auto;aspect-ratio:2/3;min-height:360px;max-height:600px;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 20px 55px #07569a25,0 4px 15px #07569a12;border:1px solid #d7e7f4}
+.promoSlide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s ease}.promoSlide.active{opacity:1;visibility:visible}
+.promoSlide img{width:100%;height:100%;object-fit:cover;display:block}
+.promoArrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid #ffffff88;border-radius:50%;background:#063b6bcc;color:#fff;cursor:pointer;z-index:10;font-size:25px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+.promoArrow:hover{background:#07569a}.promoPrev{left:12px}.promoNext{right:12px}
+.promoDots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
+.promoDot{width:8px;height:8px;border:0;border-radius:50%;background:#ffffffaa;cursor:pointer;transition:.3s;padding:0}
+.promoDot.active{width:25px;border-radius:10px;background:#fff}
+.card,.service,.area,.heroCard{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 40px #07569a12}.card{padding:24px}
+section{padding:70px 0}.head{text-align:center;margin-bottom:30px}.eyebrow{color:var(--b);font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+.head h2{font-size:clamp(28px,4vw,40px);color:var(--nav);margin:4px 0 7px}.head p{color:var(--muted)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.service{padding:25px}.icon{font-size:28px;margin-bottom:8px}.service h3{color:var(--nav);margin-bottom:5px}.service p{font-size:14px;color:var(--muted)}
+.calc{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin-bottom:12px}.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbdfea;border-radius:12px;outline:0;background:var(--input);color:var(--text);font:inherit}
+textarea{resize:vertical;min-height:82px}input:focus,select:focus,textarea:focus{border-color:#5ca5d8;box-shadow:0 0 0 4px #e7f5ff}
+.hidden{display:none!important}.note{background:#eff8ff;border-left:4px solid var(--b);padding:11px 13px;border-radius:9px;color:#48667d;font-size:12px}
+.result{background:linear-gradient(145deg,#063b6b,#0b76c5);color:#fff;border-radius:22px;padding:25px;position:sticky;top:95px}
+.result h3{margin-bottom:12px}.price{font-size:clamp(28px,4vw,38px);font-weight:900;margin:5px 0 15px;overflow-wrap:anywhere}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #ffffff22;font-size:13px}.row span{opacity:.75}
+.result .actions{margin-top:18px}.result .btn{flex:1;min-width:140px}.white{background:#fff;color:var(--b)}.ghost{background:#ffffff15;color:#fff;border:1px solid #ffffff44}
+.camera{margin-top:18px}.preview{width:100%;aspect-ratio:16/10;background:#071b2c;object-fit:cover;border-radius:15px}
+.placeholder{aspect-ratio:16/10;background:#edf7ff;border:1px dashed #a7c8df;border-radius:15px;display:flex;align-items:center;justify-content:center;text-align:center;color:#607b92;padding:20px}
+.cameraActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.cameraActions .btn{flex:1}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px}
+.rules{margin-top:20px;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:22px}.rules ul{padding-left:20px;color:var(--muted)}.rules li{margin:6px 0}
+.warn{margin-top:12px;padding:10px 12px;background:#fff8e8;border-left:4px solid #e4a329;border-radius:8px;font-size:12px;color:#6d5726}
+.areas{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.area{padding:17px}.area b{color:var(--nav);display:block}.area span{font-size:12px;color:var(--muted)}
+.contact{background:linear-gradient(135deg,#063b6b,#0b76c5);color:#fff;border-radius:28px;padding:35px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.contact h2{font-size:35px;line-height:1.15;margin:6px 0 10px}.address{background:#ffffff12;border:1px solid #ffffff25;border-radius:14px;padding:14px;margin-top:18px}
+.walist{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.wa{background:#fff;color:var(--b);padding:11px;border-radius:12px;font-weight:800;font-size:13px}.small{font-size:12px;opacity:.75;margin-top:10px}
+footer{margin-top:60px;background:#052a49;color:#c6d9e8;padding:23px}.foot{display:flex;justify-content:space-between;gap:15px}
+.modal{position:fixed;inset:0;background:#00192a99;display:none;align-items:center;justify-content:center;padding:20px;z-index:200}.modal.show{display:flex}
+.modalBox{width:min(520px,100%);background:var(--card);color:var(--text);border-radius:20px;padding:22px}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.close{border:0;background:#edf6fd;border-radius:50%;width:36px;height:36px;cursor:pointer}.shareList{display:grid;gap:8px}
+.shareBtn{padding:13px;border:1px solid var(--line);background:var(--card);border-radius:11px;display:flex;justify-content:space-between;cursor:pointer;font-weight:800;color:var(--nav)}
+@media(max-width:850px){.heroGrid,.calc,.contact{grid-template-columns:1fr}.heroGrid{gap:35px}.promoSlider{margin:auto;width:min(100%,430px)}.result{position:static}.grid3{grid-template-columns:1fr}.areas{grid-template-columns:1fr 1fr}nav ul{display:none;position:absolute;top:76px;left:0;right:0;background:#fff;padding:17px 5%;border-bottom:1px solid var(--line)}nav ul.open{display:grid}.menu{display:block}}
+@media(max-width:560px){.hero{padding:55px 0}.heroGrid{gap:30px}.promoSlider{width:100%;border-radius:30px;min-height:350px}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.areas{grid-template-columns:1fr 1fr}.walist{grid-template-columns:1fr}.foot{flex-direction:column;text-align:center}.contact{padding:24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="#beranda">
+<img src="logolls.png" alt="Logo PT Lagoliling" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+<div class="fallback">LL</div><div><small>EKSPEDISI ANTAR PULAU</small><strong>PT. LAGOLILING LINTAS SULAWESI</strong></div>
+</a>
+<button class="menu" onclick="toggleMenu()" aria-label="Buka menu">☰</button>
+<nav><ul id="nav"><li><a href="#beranda" onclick="closeMenu()">Beranda</a></li><li><a href="#layanan" onclick="closeMenu()">Layanan</a></li><li><a href="#cek" onclick="closeMenu()">Cek Tarif</a></li><li><a href="#wilayah" onclick="closeMenu()">Wilayah</a></li><li><a href="#konsultasi" onclick="closeMenu()">Konsultasi</a></li></ul></nav>
+</div></header>
+
+<section class="hero" id="beranda"><div class="wrap heroGrid">
+<div><span class="badge">● SURABAYA → SULAWESI</span>
+<h1>Pengiriman <span>Antar Pulau</span> Lebih Mudah.</h1>
+<p>Solusi pengiriman <b>Port to Port, Port to Door,</b> dan <b>Door to Door</b> dengan cek tarif dan dokumentasi barang langsung dari website.</p>
+<div class="actions"><a class="btn primary" href="#cek">Cek Tarif Pengiriman →</a><a class="btn light" href="#konsultasi">Konsultasi Pengiriman</a></div>
+</div>
+<div class="promoSlider" id="promoSlider" aria-label="Slideshow poster promosi">
+<!-- Ganti nama file di atribut src dengan poster milik Anda. Tambahkan slide dan dot jika ingin menambah poster. -->
+<div class="promoSlide"><img src="Poster promosi1.jpeg" alt="Poster promosi 1"></div>
+<div class="promoSlide"><img src="Poster promosi2.jpeg" alt="Poster promosi 2"></div>
+<button type="button" class="promoArrow promoPrev" onclick="changePromo(-1)" aria-label="Slide sebelumnya">‹</button>
+<button type="button" class="promoArrow promoNext" onclick="changePromo(1)" aria-label="Slide berikutnya">›</button>
+<div class="promoDots">
+<button class="promoDot active" onclick="goPromo(0)" aria-label="Poster 1"></button>
+<button class="promoDot" onclick="goPromo(1)" aria-label="Poster 2"></button>
+<button class="promoDot" onclick="goPromo(2)" aria-label="Poster 3"></button>
+</div>
+</div>
+</div></section>
+
+<section id="layanan"><div class="wrap"><div class="head"><div class="eyebrow">Layanan</div><h2>Skema Pengiriman</h2><p>Pilih layanan sesuai kebutuhan pengiriman Anda.</p></div>
+<div class="grid3">
+<div class="service"><div class="icon">⚓</div><h3>Port to Port</h3><p>Pengiriman dari pelabuhan asal menuju pelabuhan tujuan.</p></div>
+<div class="service"><div class="icon">🚚</div><h3>Port to Door</h3><p>Barang dari pelabuhan asal diteruskan sampai alamat tujuan.</p></div>
+<div class="service"><div class="icon">🏠</div><h3>Door to Door</h3><p>Barang dijemput dari alamat pengirim sampai alamat penerima.</p></div>
+</div></div></section>
+
+<section id="cek"><div class="wrap">
+<div class="head"><div class="eyebrow">Kalkulator</div><h2>Cek Ongkir dan Ketentuan Pengiriman</h2><p>Tarif berdasarkan daftar harga pengiriman dari Surabaya.</p></div>
+<div class="calc"><div>
+<div class="card"><div class="formgrid">
+<div class="field full"><label for="origin">Origin</label><select id="origin"><option>Surabaya</option></select></div>
+<div class="field full"><label for="destination">Tujuan</label><select id="destination"><option value="">-- Pilih tujuan --</option></select></div>
+
+<div class="field full"><label>Data Pengirim</label></div>
+<div class="field"><label for="senderName">Nama Pengirim</label><input id="senderName" type="text" placeholder="Nama lengkap pengirim"></div>
+<div class="field"><label for="senderPhone">Nomor Telepon Pengirim</label><input id="senderPhone" type="tel" placeholder="Contoh: 081234567890"></div>
+<div class="field full"><label for="senderAddress">Alamat Lengkap Pengirim</label><textarea id="senderAddress" placeholder="Nama jalan, nomor rumah, kelurahan, kecamatan, kota, kode pos"></textarea></div>
+
+<div class="field full"><label>Data Penerima</label></div>
+<div class="field"><label for="receiverName">Nama Penerima</label><input id="receiverName" type="text" placeholder="Nama lengkap penerima"></div>
+<div class="field"><label for="receiverPhone">Nomor Telepon Penerima</label><input id="receiverPhone" type="tel" placeholder="Contoh: 081234567890"></div>
+<div class="field full"><label for="receiverAddress">Alamat Lengkap Penerima</label><textarea id="receiverAddress" placeholder="Nama jalan, nomor rumah, kelurahan, kecamatan, kota, kode pos"></textarea></div>
+
+<div class="field"><label for="method">Metode Tarif</label><select id="method" onchange="toggleMethod()"><option value="kilo">Per Kilogram</option><option value="kubik">Per Kubik (m³)</option></select></div>
+<div class="field" id="weightField"><label for="weight">Berat Barang (Kg)</label><input id="weight" type="number" min="1" step=".1" placeholder="Contoh: 100"></div>
+<div class="field hidden" id="volumeField"><label for="volume">Volume Barang (m³)</label><input id="volume" type="number" min=".01" step=".01" placeholder="Contoh: 1.5"></div>
+<div class="field full"><div id="info" class="note">Pilih tujuan untuk melihat tarif.</div></div>
+<div class="field full"><button class="btn primary" style="width:100%" onclick="calculate()">Hitung Ongkir</button></div>
+</div></div>
+
+<div class="card camera"><h3 style="color:var(--nav);margin-bottom:5px">📷 Dokumentasi Barang</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Ambil foto barang langsung dari kamera atau pilih foto dari galeri. Foto dimasukkan ke PDF.</p>
+<video id="camera" class="preview hidden" autoplay playsinline></video>
+<div id="placeholder" class="placeholder">Kamera belum aktif.<br>Tekan <b>Aktifkan Kamera</b>.</div><canvas id="canvas" class="hidden"></canvas>
+<div class="cameraActions"><button class="btn light" onclick="startCamera()">📷 Aktifkan Kamera</button><button class="btn primary" onclick="takePhoto()">● Foto Barang</button><button class="btn light" onclick="stopCamera()">■ Matikan</button></div>
+<div class="cameraActions"><label class="btn light">🖼️ Pilih dari Galeri<input id="gallery" type="file" accept="image/*" multiple style="display:none" onchange="gallery(event)"></label></div>
+<div id="thumbs" class="thumbs"></div></div>
+</div>
+
+<div class="result"><h3>Hasil Perhitungan</h3><div style="opacity:.75;font-size:13px">Pilih tujuan dan masukkan data barang.</div>
+<div class="price" id="total">Rp 0</div><div id="rows"></div>
+<div class="actions"><button class="btn white" onclick="downloadPDF()">⬇ Download PDF</button><button class="btn ghost" onclick="openShare()">↗ Bagikan / WhatsApp</button></div>
+<div style="font-size:11px;opacity:.7;margin-top:12px">PDF berisi hasil tarif, data pengirim/penerima, dan dokumentasi barang.</div>
+</div></div>
+<div class="rules"><h3 style="color:var(--nav);margin-bottom:10px">Ketentuan Pengiriman</h3>
+<ul><li>Minimal <b>50 Kg</b> untuk wilayah Sulawesi Selatan.</li><li>Minimal <b>100 Kg</b> untuk wilayah luar Sulawesi Selatan.</li><li>Harga di luar asuransi.</li><li>Harga dapat berubah sewaktu-waktu.</li><li>Pengantaran di luar ibukota kabupaten harga disesuaikan.</li><li>Tidak melayani barang yang mengandung titik nyala, berbahaya, dan berisiko tinggi.</li><li><b>NEGO SAMPAI DEAL.</b></li></ul>
+<div class="warn">Minimum 50/100 Kg berlaku untuk tarif kilogram. Pricelist tidak mencantumkan minimum volume m³.</div>
+</div></div></section>
+
+<section id="wilayah"><div class="wrap"><div class="head"><div class="eyebrow">Coverage</div><h2>Daftar Wilayah Pengiriman</h2><p>Wilayah tujuan mengikuti data daftar harga pengiriman dari Surabaya.</p></div>
+<div class="areas">
+<div class="area"><b>Sulawesi Selatan</b><span>Makassar, Gowa, Maros, Pinrang, Palopo, Bone, Wajo, dan lainnya.</span></div>
+<div class="area"><b>Sulawesi Tengah</b><span>Palu, Banggai, Morowali, Donggala, Poso, Sigi, dan lainnya.</span></div>
+<div class="area"><b>Sulawesi Tenggara</b><span>Kendari, Bombana, Kolaka, Konawe, Buton, Wakatobi, dan lainnya.</span></div>
+<div class="area"><b>Sulawesi Barat</b><span>Majene, Mamuju, Mamasa, Polewali Mandar, dan lainnya.</span></div>
+<div class="area"><b>Sulawesi Utara</b><span>Manado, Bitung, Tomohon, Minahasa, Bolaang Mongondow, dan lainnya.</span></div>
+</div></div></section>
+
+<section id="konsultasi"><div class="wrap"><div class="contact">
+<div><div class="eyebrow" style="color:#a9ddff">Konsultasi</div><h2>Konsultasi Pengiriman</h2><p>Hubungi tim kami untuk pengecekan tarif, layanan, titik jemput, atau detail tujuan.</p>
+<div class="address"><b>Alamat</b><br>Jl. Perak Timur, No. 240, Surabaya</div></div>
+<div><h3>WhatsApp</h3><div class="walist" id="waList"></div><div class="small">Klik nomor untuk langsung membuka WhatsApp.</div></div>
+</div></div></section>
+<footer><div class="wrap foot"><small>© <span id="year"></span> PT. Lagoliling Lintas Sulawesi</small><small>Port to Port • Port to Door • Door to Door</small></div></footer>
+
+<div class="modal" id="modal" onclick="if(event.target.id==='modal')closeShare()"><div class="modalBox">
+<div class="modalHead"><h3>Bagikan PDF</h3><button class="close" onclick="closeShare()">×</button></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">PDF akan dibuat dan dibagikan menggunakan menu share perangkat.</p>
+<div class="shareList"><button class="shareBtn" onclick="shareToWhatsApp()">📲 Bagikan PDF ke WhatsApp <span>→</span></button></div>
+<div id="status" class="note" style="margin-top:12px">Siap membagikan PDF.</div>
+</div></div>
+
+<script>
+const { jsPDF } = window.jspdf;
+const MAIN_WHATSAPP = "6283853093599";
+const phones = ["082343433343","085176721927","085330412012","085708490410","081217934221","083853093599"];
+const rates = [
+["Sulawesi Utara","BOL MONGONDOW",8500,2125000,"8-10 Hari"],["Sulawesi Utara","BM UTARA",9000,2250000,"8-10 Hari"],["Sulawesi Utara","BM TIMUR",9000,2250000,"8-10 Hari"],["Sulawesi Utara","BM SELATAN",9000,2250000,"8-10 Hari"],["Sulawesi Utara","KEP-SANGIHE",20000,5000000,"1-2 Minggu"],["Sulawesi Utara","KEP-TALAUD",20000,5000000,"1-2 Minggu"],["Sulawesi Utara","MINAHASA",8000,2000000,"8-10 Hari"],["Sulawesi Utara","MINAHASA UTARA",9000,2250000,"8-10 Hari"],["Sulawesi Utara","MINAHASA SELATAN",9000,2250000,"8-10 Hari"],["Sulawesi Utara","MIN. TENGGARA",9000,2250000,"8-10 Hari"],["Sulawesi Utara","KEP.SIAU TAGU BI",20000,5000000,"1-2 Minggu"],["Sulawesi Utara","MANADO",8500,2125000,"8-10 Hari"],["Sulawesi Utara","BITUNG",8500,2125000,"8-10 Hari"],["Sulawesi Utara","TOMOHON",8500,2125000,"8-10 Hari"],["Sulawesi Utara","KOTA MOBAGU",8500,2125000,"8-10 Hari"],["Sulawesi Utara","GORONTALO",7500,1875000,"8-10 Hari"],["Sulawesi Utara","GORONTALO UTARA",7500,1875000,"8-10 Hari"],["Sulawesi Utara","BONE BOLANGO",8500,2125000,"8-10 Hari"],["Sulawesi Utara","POHLIWATO",8500,2125000,"8-10 Hari"],["Sulawesi Utara","BOLANGO",8500,2125000,"8-10 Hari"],
+["Sulawesi Tengah","PALU",5000,1250000,"8-10 Hari"],["Sulawesi Tengah","BANGGAI",8000,2000000,"8-10 Hari"],["Sulawesi Tengah","BANGGAI KEP.",15000,3750000,"10-15 Hari"],["Sulawesi Tengah","BANGGAI LAUT",15000,3750000,"10-15 Hari"],["Sulawesi Tengah","MOROWALI",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","MOROWALI UTARA",8000,2000000,"8-10 Hari"],["Sulawesi Tengah","DONGGALA",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","POSO",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","TOLI-TOLI",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","BUOL",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","PARIGI MOUTONG",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","TOJO UNA-UNA",7500,1875000,"8-10 Hari"],["Sulawesi Tengah","SIGI",6000,1500000,"5-6 Hari"],["Sulawesi Tengah","MUNA",6000,1500000,"5-6 Hari"],
+["Sulawesi Barat","MAJENE",5000,1250000,"4-5 Hari"],["Sulawesi Barat","MAMUJU",5500,1375000,"4-5 Hari"],["Sulawesi Barat","MAMUJU UTARA",5500,1375000,"4-5 Hari"],["Sulawesi Barat","MAMUJU TENGAH",5500,1375000,"4-5 Hari"],["Sulawesi Barat","MAMASA",5500,1375000,"4-5 Hari"],["Sulawesi Barat","POLEWALI MANDAR",5500,1375000,"4-5 Hari"],
+["Sulawesi Tenggara","BOMBANA",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KENDARI",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KOLAKA",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KOLAKA TIMUR",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KOLAKA UTARA",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KONAWE",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KONAWE SELATAN",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KONAWE UTARA",7500,1875000,"6-8 Hari"],["Sulawesi Tenggara","KONAWE KEP.",8500,2125000,"8-10 Hari"],["Sulawesi Tenggara","BUTON",9000,2250000,"8-10 Hari"],["Sulawesi Tenggara","BUTON UTARA",9000,2250000,"8-10 Hari"],["Sulawesi Tenggara","BUTON SELATAN",9000,2250000,"8-10 Hari"],["Sulawesi Tenggara","BUTON TENGAH",9000,2250000,"8-10 Hari"],["Sulawesi Tenggara","MUNA",10000,2500000,"8-10 Hari"],["Sulawesi Tenggara","MUNA BARAT",10000,2500000,"8-10 Hari"],["Sulawesi Tenggara","BAU-BAU",10000,2500000,"8-10 Hari"],["Sulawesi Tenggara","WAKATOBI",12000,3000000,"10-15 Hari"],
+["Sulawesi Selatan","MAKASSAR",2500,625000,"2-3 Hari"],["Sulawesi Selatan","GOWA",3000,750000,"3-4 Hari"],["Sulawesi Selatan","MAROS",3000,750000,"3-4 Hari"],["Sulawesi Selatan","PINRANG",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","KEP.SELAYAR",10000,2500000,"3-4 Hari"],["Sulawesi Selatan","SIDRAP",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","BARRU",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","PALOPO",5000,1250000,"3-4 Hari"],["Sulawesi Selatan","PARE-PARE",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","BANTAENG",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","BONE",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","ENREKANG",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","JENEPONTO",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","LUWU",4500,1125000,"3-4 Hari"],["Sulawesi Selatan","PANGKEP",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","SINJAI",6000,1500000,"3-4 Hari"],["Sulawesi Selatan","SOPPENG",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","TAKALAR",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","TANA TORAJA",5000,1250000,"3-4 Hari"],["Sulawesi Selatan","WAJO",4000,1000000,"3-4 Hari"],["Sulawesi Selatan","LUWU UTARA",6000,1500000,"3-4 Hari"],["Sulawesi Selatan","LUWU TIMUR",6000,1500000,"3-4 Hari"],["Sulawesi Selatan","BULUKUMBA",4000,1000000,"3-4 Hari"]
+];
+let photos=[], stream=null, last=null;
+const money=n=>new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n);
+function toggleMenu(){document.getElementById("nav").classList.toggle("open")}
+function closeMenu(){document.getElementById("nav").classList.remove("open")}
+
+/* Slideshow: tambahkan elemen .promoSlide dan .promoDot dengan indeks yang sesuai jika menambah poster. */
+let promoIndex=0;
+const promoSlides=document.querySelectorAll(".promoSlide");
+const promoDots=document.querySelectorAll(".promoDot");
+function showPromo(index){
+ if(!promoSlides.length)return;
+ promoIndex=(index+promoSlides.length)%promoSlides.length;
+ promoSlides.forEach((slide,i)=>slide.classList.toggle("active",i===promoIndex));
+ promoDots.forEach((dot,i)=>dot.classList.toggle("active",i===promoIndex));
+}
+function changePromo(direction){showPromo(promoIndex+direction)}
+function goPromo(index){showPromo(index)}
+setInterval(()=>{if(promoSlides.length>1)changePromo(1)},5000);
+
+function fillDest(){
+ const s=document.getElementById("destination"),groups={};
+ rates.forEach((r,i)=>{
+  if(!groups[r[0]]){groups[r[0]]=document.createElement("optgroup");groups[r[0]].label=r[0];s.appendChild(groups[r[0]])}
+  const o=document.createElement("option");o.value=i;o.textContent=r[1];groups[r[0]].appendChild(o);
+ });
+ s.onchange=updateInfo;
+}
+function toggleMethod(){
+ const m=document.getElementById("method").value;
+ document.getElementById("weightField").classList.toggle("hidden",m!=="kilo");
+ document.getElementById("volumeField").classList.toggle("hidden",m!=="kubik");
+ updateInfo();
+}
+function updateInfo(){
+ const i=document.getElementById("destination").value,o=rates[i],box=document.getElementById("info");
+ if(!o){box.textContent="Pilih tujuan untuk melihat tarif.";return}
+ const m=document.getElementById("method").value,rate=m==="kilo"?o[2]:o[3];
+ const min=o[0]==="Sulawesi Selatan"?"50 Kg":"100 Kg";
+ box.innerHTML=`<b>${o[1]}</b> • ${money(rate)} / ${m==="kilo"?"Kg":"m³"} • Estimasi ${o[4]}<br>${m==="kilo"?"Minimum penagihan: "+min:"Tidak ada minimum volume yang tercantum."}`;
+}
+function getPartyData(){
+ return {
+  senderName:document.getElementById("senderName").value.trim(),
+  senderPhone:document.getElementById("senderPhone").value.trim(),
+  senderAddress:document.getElementById("senderAddress").value.trim(),
+  receiverName:document.getElementById("receiverName").value.trim(),
+  receiverPhone:document.getElementById("receiverPhone").value.trim(),
+  receiverAddress:document.getElementById("receiverAddress").value.trim()
+ };
+}
+function calculate(){
+ const i=document.getElementById("destination").value,o=rates[i];
+ if(i===""){alert("Pilih tujuan.");return}
+ const m=document.getElementById("method").value,inputId=m==="kilo"?"weight":"volume";
+ const v=Number(document.getElementById(inputId).value);
+ if(!v||v<=0){alert("Masukkan berat/volume.");return}
+ const billed=m==="kilo"?Math.max(v,o[0]==="Sulawesi Selatan"?50:100):v;
+ const rate=m==="kilo"?o[2]:o[3];
+ last={origin:"Surabaya",destination:o[1],region:o[0],method:m==="kilo"?"Per Kilogram":"Per Kubik (m³)",input:v,billed,unit:m==="kilo"?"Kg":"m³",rate,total:billed*rate,lead:o[4],...getPartyData()};
+ document.getElementById("total").textContent=money(last.total);
+ document.getElementById("rows").innerHTML=`
+ <div class="row"><span>Tujuan</span><b>${o[1]}</b></div>
+ <div class="row"><span>Wilayah</span><b>${o[0]}</b></div>
+ <div class="row"><span>Tarif</span><b>${money(rate)} / ${last.unit}</b></div>
+ <div class="row"><span>Ditagihkan</span><b>${billed.toLocaleString("id-ID")} ${last.unit}</b></div>
+ <div class="row"><span>Estimasi</span><b>${o[4]}</b></div>
+ <div class="row"><span>Pengirim</span><b>${escapeHTML(last.senderName||"-")}</b></div>
+ <div class="row"><span>Penerima</span><b>${escapeHTML(last.receiverName||"-")}</b></div>`;
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+async function startCamera(){
+ if(!navigator.mediaDevices?.getUserMedia){alert("Kamera membutuhkan browser modern dan HTTPS/localhost.");return}
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
+  const v=document.getElementById("camera");v.srcObject=stream;v.classList.remove("hidden");
+  document.getElementById("placeholder").classList.add("hidden");
+ }catch(e){alert("Izin kamera ditolak/tidak tersedia. Pastikan website menggunakan HTTPS.")}
+}
+function stopCamera(){
+ if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;
+ document.getElementById("camera").classList.add("hidden");
+ document.getElementById("placeholder").classList.remove("hidden");
+}
+function takePhoto(){
+ if(!stream){alert("Aktifkan kamera terlebih dahulu.");return}
+ const v=document.getElementById("camera"),c=document.getElementById("canvas");
+ c.width=v.videoWidth;c.height=v.videoHeight;c.getContext("2d").drawImage(v,0,0);
+ photos.push(c.toDataURL("image/jpeg",.88));thumbs();
+}
+function gallery(e){
+ [...e.target.files].forEach(f=>{
+  if(!f.type.startsWith("image/"))return;
+  const r=new FileReader();r.onload=x=>{photos.push(x.target.result);thumbs()};r.readAsDataURL(f);
+ });
+ e.target.value="";
+}
+function thumbs(){
+ document.getElementById("thumbs").innerHTML=photos.map((p,i)=>`
+ <div style="position:relative"><img src="${p}" alt="Foto barang ${i+1}">
+ <button aria-label="Hapus foto" onclick="photos.splice(${i},1);thumbs()" style="position:absolute;right:3px;top:3px;border:0;border-radius:50%;background:white;color:red;cursor:pointer">×</button></div>`).join("");
+}
+function pdf(){
+ if(!last){alert("Hitung ongkir terlebih dahulu.");return null}
+ const d=new jsPDF();let y=18;
+ d.setFillColor(7,86,154);d.rect(0,0,210,28,"F");d.setTextColor(255,255,255);
+ d.setFontSize(15);d.setFont("helvetica","bold");d.text("PT. LAGOLILING LINTAS SULAWESI",12,11);
+ d.setFontSize(9);d.setFont("helvetica","normal");d.text("Dokumentasi & Estimasi Pengiriman",12,19);
+ d.setTextColor(20,45,65);y=38;d.setFont("helvetica","bold");d.setFontSize(13);d.text("DETAIL PENGIRIMAN",12,y);y+=9;d.setFontSize(10);
+ const rows=[["Origin",last.origin],["Tujuan",last.destination],["Wilayah",last.region],["Metode",last.method],["Input",`${last.input.toLocaleString("id-ID")} ${last.unit}`],["Ditagihkan",`${last.billed.toLocaleString("id-ID")} ${last.unit}`],["Tarif",`${money(last.rate)} / ${last.unit}`],["Total",money(last.total)],["Lead Time",last.lead]];
+ d.setFont("helvetica","normal");
+ rows.forEach(r=>{d.setFont("helvetica","bold");d.text(r[0],12,y);d.setFont("helvetica","normal");d.text(d.splitTextToSize(String(r[1]),135),62,y);y+=7});
+ y+=4;d.setFont("helvetica","bold");d.text("DATA PENGIRIM",12,y);y+=7;d.setFont("helvetica","normal");
+ const sender=[["Nama",last.senderName],["Telepon",last.senderPhone],["Alamat",last.senderAddress]];
+ sender.forEach(r=>{d.setFont("helvetica","bold");d.text(r[0],12,y);d.setFont("helvetica","normal");const lines=d.splitTextToSize(r[1]||"-",135);d.text(lines,62,y);y+=Math.max(7,lines.length*5)});
+ y+=3;d.setFont("helvetica","bold");d.text("DATA PENERIMA",12,y);y+=7;d.setFont("helvetica","normal");
+ const receiver=[["Nama",last.receiverName],["Telepon",last.receiverPhone],["Alamat",last.receiverAddress]];
+ receiver.forEach(r=>{d.setFont("helvetica","bold");d.text(r[0],12,y);d.setFont("helvetica","normal");const lines=d.splitTextToSize(r[1]||"-",135);d.text(lines,62,y);y+=Math.max(7,lines.length*5)});
+ y+=5;
+ if(y>255){d.addPage();y=20}
+ d.setFont("helvetica","bold");d.text("KETENTUAN",12,y);y+=7;d.setFont("helvetica","normal");
+ ["Minimal 50 Kg untuk Sulawesi Selatan.","Minimal 100 Kg untuk wilayah luar Sulawesi Selatan.","Harga di luar asuransi.","Harga dapat berubah sewaktu-waktu.","Pengantaran di luar ibukota kabupaten dapat disesuaikan.","Tidak melayani barang titik nyala, berbahaya, dan berisiko tinggi.","NEGO SAMPAI DEAL."].forEach(t=>{
+  const lines=d.splitTextToSize("- "+t,185);
+  if(y+lines.length*5>275){d.addPage();y=20}
+  d.text(lines,12,y);y+=lines.length*5;
+ });
+ if(photos.length){y+=5;if(y>265){d.addPage();y=20}d.setFont("helvetica","bold");d.text("DOKUMENTASI BARANG",12,y);y+=7}
+ photos.forEach((p,i)=>{
+  if(y>245){d.addPage();y=20}
+  d.setFont("helvetica","bold");d.text("Foto "+(i+1),12,y);y+=5;
+  const q=d.getImageProperties(p);let w=180,h=w*q.height/q.width;if(h>90){h=90;w=h*q.width/q.height}
+  if(y+h>280){d.addPage();y=20}
+  d.addImage(p,"JPEG",12,y,w,h,"","FAST");y+=h+9;
+ });
+ if(y>265){d.addPage();y=20}
+ d.setFont("helvetica","bold");d.text("KONSULTASI PENGIRIMAN",12,y);y+=7;d.setFont("helvetica","normal");
+ d.text("Jl. Perak Timur, No. 240, Surabaya",12,y);y+=6;d.text("WhatsApp: 083853093599",12,y);
+ return d;
+}
+function fileName(){return "Dokumentasi-"+last.destination.replace(/[^a-z0-9]/gi,"-")+".pdf"}
+function downloadPDF(){const d=pdf();if(d)d.save(fileName())}
+function openShare(){if(!last){alert("Hitung ongkir terlebih dahulu.");return}document.getElementById("modal").classList.add("show")}
+function closeShare(){document.getElementById("modal").classList.remove("show")}
+function buildMessage(){
+ return `Halo PT. Lagoliling Lintas Sulawesi, saya ingin konsultasi pengiriman.\n\nData Pengirim:\nNama: ${last.senderName||"-"}\nTelepon: ${last.senderPhone||"-"}\nAlamat: ${last.senderAddress||"-"}\n\nData Penerima:\nNama: ${last.receiverName||"-"}\nTelepon: ${last.receiverPhone||"-"}\nAlamat: ${last.receiverAddress||"-"}\n\nTujuan: ${last.destination}\nWilayah: ${last.region}\nMetode: ${last.method}\nInput: ${last.input.toLocaleString("id-ID")} ${last.unit}\nDitagihkan: ${last.billed.toLocaleString("id-ID")} ${last.unit}\nTarif: ${money(last.rate)} / ${last.unit}\nTotal estimasi: ${money(last.total)}\nLead time: ${last.lead}\n\nSaya melampirkan PDF dokumentasi dan estimasi pengiriman.`;
+}
+async function shareToWhatsApp(){
+ if(!last){alert("Hitung ongkir terlebih dahulu.");return}
+ const d=pdf();if(!d)return;
+ const name=fileName(),blob=d.output("blob"),file=new File([blob],name,{type:"application/pdf"}),msg=buildMessage();
+ document.getElementById("status").textContent="Menyiapkan PDF untuk dibagikan...";
+ if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+  try{await navigator.share({title:"Dokumentasi Pengiriman - PT Lagoliling",text:msg,files:[file]});document.getElementById("status").textContent="Menu berbagi perangkat telah dibuka.";return}
+  catch(error){if(error.name==="AbortError"){document.getElementById("status").textContent="Berbagi dibatalkan.";return}}
+ }
+ d.save(name);
+ window.open("https://wa.me/"+MAIN_WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");
+ document.getElementById("status").innerHTML="PDF sudah dibuat dan WhatsApp dibuka ke <b>083853093599</b>.<br>Jika PDF belum terlampir otomatis, pilih file PDF dari folder Download.";
+}
+document.getElementById("year").textContent=new Date().getFullYear();
+fillDest();
+phones.forEach(n=>{const a=document.createElement("a");a.className="wa";a.target="_blank";a.rel="noopener";a.href="https://wa.me/62"+n.slice(1);a.textContent="💬 "+n;document.getElementById("waList").appendChild(a)});
+</script>
+</body>
+</html>
